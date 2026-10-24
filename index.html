@@ -3,233 +3,236 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Singapore Indoor Playgrounds — Family Finder (2A + 2K)</title>
-<meta name="description" content="Filter and compare Singapore's best indoor playgrounds by region, price, and rating. Links to official sites. Costs estimated for 2 adults + 2 kids.">
+<title>SG Indoor Playgrounds</title>
+<meta name="description" content="Find Singapore's best indoor playgrounds. Filter by region, price and rating. Costs shown for 2 adults + 2 kids.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#fbf7f0; --card:#ffffff; --ink:#2a2420; --muted:#6b6058;
-    --line:#ece3d7; --accent:#e8743b; --accent2:#2f9e8f; --gold:#f2b705;
-    --pick:#fff6ec; --chip:#f3ece1; --shadow:0 2px 14px rgba(70,50,30,.08); --radius:16px;
+    --bg:#f4f6fb; --card:#ffffff; --ink:#111827; --muted:#6b7280;
+    --line:#e7ebf2; --radius:22px; --shadow:0 6px 24px rgba(17,24,39,.07);
+    --p1:#ff6b6b; --p2:#ffd166; --p3:#06d6a0; --p4:#4d96ff; --p5:#9b5de5; --p6:#f15bb5;
+    --accent:#4d96ff; --good:#06d6a0; --gold:#ffb703;
   }
   @media (prefers-color-scheme: dark){
-    :root{ --bg:#17130f; --card:#211b16; --ink:#f4ece2; --muted:#b2a596;
-      --line:#352b22; --pick:#2a2016; --chip:#2b2219; --shadow:0 2px 16px rgba(0,0,0,.35); }
+    :root{ --bg:#0e1118; --card:#171b24; --ink:#f3f5f9; --muted:#9aa3b2;
+      --line:#242a35; --shadow:0 6px 24px rgba(0,0,0,.35); }
   }
-  *{box-sizing:border-box}
-  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-    background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:1040px;margin:0 auto;padding:0 18px}
-  header.hero{padding:34px 0 18px;text-align:center}
-  .hero h1{font-size:clamp(25px,5vw,38px);margin:0 0 8px;letter-spacing:-.02em}
-  .hero p{color:var(--muted);font-size:clamp(14px,2.2vw,16px);margin:0 auto;max-width:560px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);
+    color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.4}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 16px}
 
-  /* Pick banner */
-  .rec{background:linear-gradient(135deg,var(--pick),var(--card));border:1px solid var(--gold);
-    border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);margin:18px 0}
-  .rec .tag{display:inline-block;background:var(--gold);color:#4a3600;font-weight:700;font-size:11px;
-    padding:3px 10px;border-radius:999px;letter-spacing:.03em;text-transform:uppercase}
-  .rec h3{margin:8px 0 3px;font-size:18px}
-  .rec p{margin:0;color:var(--muted);font-size:14px}
+  /* HERO — gov.sg status-band style */
+  .hero{background:linear-gradient(135deg,#4d96ff 0%,#6a5cff 55%,#9b5de5 100%);
+    color:#fff;padding:40px 0 70px;position:relative;overflow:hidden;text-align:center}
+  .hero::after{content:"";position:absolute;inset:0;background:
+    radial-gradient(circle at 15% 20%,rgba(255,255,255,.18),transparent 40%),
+    radial-gradient(circle at 85% 10%,rgba(255,255,255,.12),transparent 35%)}
+  .hero .in{position:relative;z-index:1}
+  .hero .kicker{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+  .hero h1{font-size:clamp(30px,6vw,52px);font-weight:900;letter-spacing:-.03em;margin:8px 0 6px;line-height:1.05}
+  .hero p{font-size:clamp(14px,2.4vw,17px);opacity:.92;font-weight:500}
+  .hero .stat-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+  .statchip{background:rgba(255,255,255,.16);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.22);
+    border-radius:16px;padding:10px 16px;min-width:92px}
+  .statchip .n{font-size:22px;font-weight:800;line-height:1}
+  .statchip .l{font-size:11px;opacity:.85;margin-top:3px;font-weight:500}
 
-  /* Controls */
-  .controls{position:sticky;top:0;z-index:20;background:var(--bg);padding:12px 0;border-bottom:1px solid var(--line)}
-  .search{width:100%;padding:12px 14px;font-size:16px;border:1px solid var(--line);border-radius:12px;
-    background:var(--card);color:var(--ink)}
-  .search::placeholder{color:var(--muted)}
-  .filter-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
-  .flabel{font-size:12px;color:var(--muted);margin-right:2px;align-self:center}
-  .chip{background:var(--chip);border:1px solid var(--line);border-radius:999px;padding:7px 14px;
-    font-size:13px;color:var(--ink);cursor:pointer;user-select:none;transition:.12s}
-  .chip:hover{border-color:var(--accent2)}
-  .chip.active{background:var(--accent);color:#fff;border-color:var(--accent)}
-  .sortsel{margin-left:auto;padding:7px 10px;border:1px solid var(--line);border-radius:10px;
-    background:var(--card);color:var(--ink);font-size:13px}
-  .count{font-size:12.5px;color:var(--muted);margin:10px 0 2px}
+  /* PICK card floats over hero */
+  .pickwrap{margin-top:-46px;position:relative;z-index:5}
+  .pickcard{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);
+    padding:18px 20px;display:flex;align-items:center;gap:16px;border:2px solid var(--gold)}
+  .pickcard .emoji{font-size:40px;line-height:1}
+  .pickcard .body{flex:1;min-width:0}
+  .pickcard .lbl{font-size:11px;font-weight:800;color:var(--gold);letter-spacing:.08em;text-transform:uppercase}
+  .pickcard h3{font-size:19px;font-weight:800;margin:2px 0}
+  .pickcard p{font-size:13px;color:var(--muted);font-weight:500}
+  .pickcard .go{background:var(--gold);color:#3a2a00;text-decoration:none;font-weight:800;font-size:13px;
+    padding:11px 16px;border-radius:14px;white-space:nowrap}
+  @media(max-width:560px){.pickcard{flex-wrap:wrap}.pickcard .go{flex:1;text-align:center}}
 
-  /* Cards */
-  #list{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin:8px 0 10px}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-    padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column}
-  .card.pick{border-color:var(--gold);box-shadow:0 0 0 2px rgba(242,183,5,.22),var(--shadow)}
-  .ctop{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
-  .card h3{margin:0;font-size:18px}
-  .pickbadge{background:var(--gold);color:#4a3600;font-weight:700;font-size:10px;padding:2px 8px;
-    border-radius:999px;text-transform:uppercase;letter-spacing:.03em;white-space:nowrap}
-  .stars{color:var(--gold);font-size:13px;margin-top:3px}
-  .stars small{color:var(--muted)}
-  .region{display:inline-block;background:var(--chip);border:1px solid var(--line);border-radius:999px;
-    padding:2px 9px;font-size:11px;color:var(--muted);margin-top:8px}
-  .loc{color:var(--muted);font-size:12.5px;margin:8px 0 0}
-  .price{background:var(--bg);border-radius:10px;padding:9px 11px;margin:10px 0}
-  .price .big{font-size:19px;font-weight:800;color:var(--accent)}
-  .price .note{color:var(--muted);font-size:11.5px;margin-top:2px}
-  .verdict{font-size:13px;color:var(--ink);margin:2px 0 12px}
-  .links{display:flex;gap:8px;margin-top:auto}
-  .links a{flex:1;text-align:center;text-decoration:none;font-size:13px;font-weight:600;
-    padding:9px;border-radius:10px;border:1px solid var(--line)}
-  .links a.site{background:var(--accent);color:#fff;border-color:var(--accent)}
-  .links a.map{background:var(--card);color:var(--accent2)}
-  .links a:hover{opacity:.9}
-  .empty{text-align:center;color:var(--muted);padding:40px 0;font-size:15px}
+  /* FILTER BAR */
+  .bar{position:sticky;top:0;z-index:30;background:var(--bg);padding:16px 0 10px}
+  .search{width:100%;padding:14px 16px;font-size:16px;border:2px solid var(--line);border-radius:16px;
+    background:var(--card);color:var(--ink);font-family:inherit;font-weight:500}
+  .search:focus{outline:none;border-color:var(--accent)}
+  .chips{display:flex;gap:8px;overflow-x:auto;padding:12px 2px 4px;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:none;background:var(--card);border:2px solid var(--line);border-radius:999px;padding:9px 16px;
+    font-size:14px;font-weight:700;color:var(--ink);cursor:pointer;transition:.12s;white-space:nowrap}
+  .chip.active{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  .sortbar{display:flex;align-items:center;gap:8px;margin-top:4px}
+  .sortbar .n{font-size:13px;font-weight:700;color:var(--muted)}
+  select.sort{margin-left:auto;padding:9px 12px;border:2px solid var(--line);border-radius:12px;
+    background:var(--card);color:var(--ink);font-family:inherit;font-size:13px;font-weight:700}
 
-  .tips{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin:14px 0}
-  .tips h2{margin:0 0 8px;font-size:18px}
-  .tips li{font-size:13.5px;margin:6px 0;color:var(--ink)}
-  footer{margin:30px 0;color:var(--muted);font-size:12px;text-align:center;border-top:1px solid var(--line);padding-top:16px}
+  /* GRID */
+  #grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;margin:12px 0 10px}
+  .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;
+    display:flex;flex-direction:column;border:1px solid var(--line)}
+  .thumb{height:78px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;color:#fff;position:relative}
+  .thumb .big{font-size:40px}
+  .thumb .rank{position:absolute;top:10px;right:14px;background:rgba(255,255,255,.25);border-radius:999px;
+    font-size:11px;font-weight:800;padding:3px 9px}
+  .thumb.pick::before{content:"⭐";position:absolute;top:9px;left:14px;font-size:16px}
+  .cbody{padding:14px 16px 16px;display:flex;flex-direction:column;flex:1}
+  .cbody h3{font-size:17px;font-weight:800;letter-spacing:-.01em}
+  .regions{display:flex;gap:5px;flex-wrap:wrap;margin:7px 0}
+  .rtag{font-size:10.5px;font-weight:700;background:var(--bg);border:1px solid var(--line);
+    border-radius:999px;padding:2px 8px;color:var(--muted)}
+  .loc{font-size:12px;color:var(--muted);font-weight:500;margin-bottom:10px}
+  /* visual rating bar */
+  .meter{display:flex;align-items:center;gap:8px;margin:3px 0}
+  .meter .ico{font-size:12px;width:52px;color:var(--muted);font-weight:700}
+  .track{flex:1;height:8px;background:var(--bg);border-radius:999px;overflow:hidden;border:1px solid var(--line)}
+  .fill{height:100%;border-radius:999px}
+  .fill.rate{background:var(--gold)}
+  .fill.price{background:var(--good)}
+  .mval{font-size:12px;font-weight:800;width:62px;text-align:right}
+  .links{display:flex;gap:8px;margin-top:12px}
+  .links a{flex:1;text-align:center;text-decoration:none;font-size:13px;font-weight:800;padding:11px;border-radius:13px}
+  .links a.site{background:var(--accent);color:#fff}
+  .links a.map{background:var(--bg);color:var(--ink);border:2px solid var(--line)}
+  .links a:active{transform:scale(.97)}
+
+  .empty{text-align:center;color:var(--muted);padding:44px 0;font-weight:600}
+
+  /* tips strip */
+  .tips{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+  .tip{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;text-align:center}
+  .tip .e{font-size:26px}
+  .tip .t{font-size:12.5px;font-weight:600;color:var(--muted);margin-top:6px}
+  footer{text-align:center;color:var(--muted);font-size:11.5px;padding:24px 0 34px;font-weight:500}
 </style>
 </head>
 <body>
+
+<div class="hero">
+  <div class="wrap in">
+    <div class="kicker">🇸🇬 Family Finder</div>
+    <h1>Indoor Playgrounds</h1>
+    <p>Beat the heat &amp; haze. Costs shown for 2 adults + 2 kids.</p>
+    <div class="stat-row">
+      <div class="statchip"><div class="n">9</div><div class="l">venues</div></div>
+      <div class="statchip"><div class="n">6</div><div class="l">regions</div></div>
+      <div class="statchip"><div class="n">$24+</div><div class="l">from</div></div>
+      <div class="statchip"><div class="n">4.7★</div><div class="l">top rated</div></div>
+    </div>
+  </div>
+</div>
+
 <div class="wrap">
-
-  <header class="hero">
-    <h1>🎪 SG Indoor Playground Finder</h1>
-    <p>Filter by region, price &amp; rating. Tap a venue for its official site. Costs estimated for <b>2 adults + 2 kids</b>.</p>
-  </header>
-
-  <div class="rec">
-    <span class="tag">⭐ Our pick</span>
-    <h3>Amazonia @ Great World</h3>
-    <p>Best all-rounder for a ~5yo + ~2yo: big slides, safe toddler zone, parent bistro, and <b>unlimited weekday play</b>. Central &amp; well-reviewed (~$78–88).</p>
+  <div class="pickwrap">
+    <div class="pickcard">
+      <div class="emoji">🏆</div>
+      <div class="body">
+        <div class="lbl">Our pick</div>
+        <h3>Amazonia @ Great World</h3>
+        <p>Big slides + toddler zone + parent bistro · ~$83 · weekday unlimited</p>
+      </div>
+      <a class="go" href="https://www.amazoniafun.com/" target="_blank" rel="noopener">Visit ↗</a>
+    </div>
   </div>
 
-  <div class="controls">
-    <input id="q" class="search" type="search" placeholder="🔍 Search a playground…" autocomplete="off">
-    <div class="filter-row">
-      <span class="flabel">Region:</span>
-      <span class="chip active" data-region="all">All</span>
-      <span class="chip" data-region="Central">Central</span>
-      <span class="chip" data-region="East">East</span>
-      <span class="chip" data-region="West">West</span>
-      <span class="chip" data-region="North">North</span>
-      <span class="chip" data-region="North-East">North-East</span>
-      <select id="sort" class="sortsel">
-        <option value="rank">Sort: Our ranking</option>
+  <div class="bar">
+    <input id="q" class="search" type="search" placeholder="🔍 Search…" autocomplete="off">
+    <div class="chips" id="chips">
+      <span class="chip active" data-r="all">All</span>
+      <span class="chip" data-r="Central">📍 Central</span>
+      <span class="chip" data-r="East">East</span>
+      <span class="chip" data-r="West">West</span>
+      <span class="chip" data-r="North">North</span>
+      <span class="chip" data-r="North-East">North-East</span>
+    </div>
+    <div class="sortbar">
+      <span class="n" id="count"></span>
+      <select class="sort" id="sort">
+        <option value="rank">⭐ Our ranking</option>
         <option value="rating">Highest rated</option>
-        <option value="priceLow">Cheapest first</option>
-        <option value="priceHigh">Priciest first</option>
+        <option value="priceLow">Cheapest</option>
+        <option value="priceHigh">Priciest</option>
         <option value="name">A–Z</option>
       </select>
     </div>
-    <div class="count" id="count"></div>
   </div>
 
-  <div id="list"></div>
-  <div class="empty" id="empty" style="display:none">No playgrounds match — try clearing filters.</div>
+  <div id="grid"></div>
+  <div class="empty" id="empty" style="display:none">🙈 Nothing matches — clear filters.</div>
 
   <div class="tips">
-    <h2>💡 Quick tips</h2>
-    <ul>
-      <li>🧦 <b>Grip socks mandatory</b> everywhere — keep spare pairs in the car.</li>
-      <li>📅 <b>Go on a weekday</b> — many give unlimited play + far fewer crowds for the same price.</li>
-      <li>💳 <b>Adults usually free</b> (1 per child) — except <b>SuperPark</b>, which charges per head.</li>
-      <li>🧒 For a ~5yo + ~2yo, pick venues with a <b>separate toddler zone</b> (Amazonia, Polliwogs, Kiztopia).</li>
-      <li>📲 Pre-book weekends &amp; school holidays; Klook is often cheaper than walk-in.</li>
-    </ul>
+    <div class="tip"><div class="e">🧦</div><div class="t">Grip socks required everywhere</div></div>
+    <div class="tip"><div class="e">📅</div><div class="t">Weekdays = unlimited play + quiet</div></div>
+    <div class="tip"><div class="e">👨‍👩‍👧</div><div class="t">1 adult free per child (except SuperPark)</div></div>
+    <div class="tip"><div class="e">📲</div><div class="t">Pre-book weekends · Klook often cheaper</div></div>
   </div>
 
   <footer>
-    Prices &amp; ratings are Oct-2026 estimates from public listings — confirm on the official site before going.<br>
+    Prices &amp; ratings are Oct-2026 estimates — confirm on the official site.<br>
     Not affiliated with any venue · made 💛 for a family of four.
   </footer>
 </div>
 
 <script>
-const DATA = [
-  { rank:1, name:"Amazonia", region:["Central"], area:"Great World, #03-113", rating:4.3,
-    price:83, priceText:"~$78–88", pick:true,
-    verdict:"All-round best: 8m slide + toddler zone + bistro. Weekday = unlimited play.",
-    site:"https://www.amazoniafun.com/", map:"Amazonia Great World Singapore" },
-  { rank:2, name:"Kiztopia", region:["Central","West","North-East"], area:"Marina Sq (flagship) · Jurong Point · Waterway Point · Cineleisure", rating:4.4,
-    price:90, priceText:"~$80–100", pick:false,
-    verdict:"Most variety — 18 themed zones, role-play, mega ball pit. Crowded weekends.",
-    site:"https://kiztopia.com/", map:"Kiztopia Marina Square" },
-  { rank:3, name:"T-Play (HomeTeamNS)", region:["West","North"], area:"Bukit Batok (4.8★) · Khatib (4.6★)", rating:4.7,
-    price:46, priceText:"~$41–51", pick:false,
-    verdict:"Best value + highest rated. Multi-storey play. Further out; cheaper for members.",
-    site:"https://www.hometeamns.sg/tplay/", map:"T-Play HomeTeamNS Bukit Batok" },
-  { rank:4, name:"The Polliwogs", region:["Central"], area:"VivoCity #03-12 · Clarke Quay Central (cat-themed)", rating:4.2,
-    price:58, priceText:"~$50–66", pick:false,
-    verdict:"Most parent-friendly: dedicated toddler zone + wifi/power lounge. VivoCity = easy.",
-    site:"https://thepolliwogs.com/", map:"The Polliwogs VivoCity" },
-  { rank:5, name:"SuperPark", region:["Central"], area:"Suntec City Mall (North Wing)", rating:4.3,
-    price:81, priceText:"~$62–100", pick:false,
-    verdict:"34 activities, trampolines, go-karts. Great for Leo + adults, but charges per head.",
-    site:"https://www.superpark.com.sg/", map:"SuperPark Suntec City" },
-  { rank:6, name:"Kidz Amaze (SAFRA)", region:["Central","West","North-East"], area:"Toa Payoh · Jurong · Punggol (indoor water play)", rating:4.2,
-    price:32, priceText:"~$24–40", pick:false,
-    verdict:"Cheapest option. Giant vertical maze. Punggol adds a sheltered water playground.",
-    site:"https://www.safra.sg/facilities-services/kidz-amaze-indoor-playgrounds", map:"Kidz Amaze SAFRA Toa Payoh" },
-  { rank:7, name:"buds by Shangri-La", region:["Central"], area:"Shangri-La Hotel, Orange Grove Rd", rating:4.3,
-    price:105, priceText:"~$90–120", pick:false,
-    verdict:"The luxe treat — premium indoor-outdoor, wet play + sensory zones. Priciest.",
-    site:"https://www.shangri-la.com/singapore/shangrila/for-kids/buds-by-shangri-la/", map:"buds by Shangri-La Singapore" },
-  { rank:8, name:"Airzone", region:["Central"], area:"City Square Mall, #02-K4/K10", rating:4.4,
-    price:58, priceText:"~$56–60", pick:false,
-    verdict:"Unique giant suspended nets. 60-min sessions; better for older/bigger kids.",
-    site:"https://airzone.sg/", map:"Airzone City Square Mall" },
-  { rank:9, name:"Zoomoov / Jolly Fields", region:["Central","East","West","North-East"], area:"Jewel · City Square · Jurong Point · Westgate · AMK Hub · VivoCity · Kallang Wave", rating:4.3,
-    price:43, priceText:"~$36–50", pick:false,
-    verdict:"Great for the 2yo (gentle rides + sand play), everywhere. Less for the 5yo.",
-    site:"https://zoomoov.com/", map:"Zoomoov Jolly Fields Singapore" },
+const C={p1:'#ff6b6b',p2:'#ffd166',p3:'#06d6a0',p4:'#4d96ff',p5:'#9b5de5',p6:'#f15bb5'};
+const DATA=[
+ {rank:1,name:"Amazonia",emoji:"🌴",color:C.p3,region:["Central"],area:"Great World",rating:4.3,price:83,priceText:"$78–88",pick:true,site:"https://www.amazoniafun.com/",map:"Amazonia Great World Singapore"},
+ {rank:2,name:"Kiztopia",emoji:"🎠",color:C.p6,region:["Central","West","North-East"],area:"Marina Sq · Jurong Pt · Waterway Pt",rating:4.4,price:90,priceText:"$80–100",pick:false,site:"https://kiztopia.com/",map:"Kiztopia Marina Square"},
+ {rank:3,name:"T-Play",emoji:"🧗",color:C.p4,region:["West","North"],area:"Bukit Batok · Khatib",rating:4.7,price:46,priceText:"$41–51",pick:false,site:"https://www.hometeamns.sg/tplay/",map:"T-Play HomeTeamNS Bukit Batok"},
+ {rank:4,name:"The Polliwogs",emoji:"🐸",color:C.p3,region:["Central"],area:"VivoCity · Clarke Quay",rating:4.2,price:58,priceText:"$50–66",pick:false,site:"https://thepolliwogs.com/",map:"The Polliwogs VivoCity"},
+ {rank:5,name:"SuperPark",emoji:"🤸",color:C.p1,region:["Central"],area:"Suntec City",rating:4.3,price:81,priceText:"$62–100",pick:false,site:"https://www.superpark.com.sg/",map:"SuperPark Suntec City"},
+ {rank:6,name:"Kidz Amaze",emoji:"🏰",color:C.p5,region:["Central","West","North-East"],area:"SAFRA Toa Payoh · Jurong · Punggol",rating:4.2,price:32,priceText:"$24–40",pick:false,site:"https://www.safra.sg/facilities-services/kidz-amaze-indoor-playgrounds",map:"Kidz Amaze SAFRA Toa Payoh"},
+ {rank:7,name:"buds by Shangri-La",emoji:"✨",color:C.p2,region:["Central"],area:"Orange Grove Rd",rating:4.3,price:105,priceText:"$90–120",pick:false,site:"https://www.shangri-la.com/singapore/shangrila/for-kids/buds-by-shangri-la/",map:"buds by Shangri-La Singapore"},
+ {rank:8,name:"Airzone",emoji:"🕸️",color:C.p4,region:["Central"],area:"City Square Mall",rating:4.4,price:58,priceText:"$56–60",pick:false,site:"https://airzone.sg/",map:"Airzone City Square Mall"},
+ {rank:9,name:"Zoomoov",emoji:"🦄",color:C.p6,region:["Central","East","West","North-East"],area:"Jewel · Westgate · AMK · VivoCity +",rating:4.3,price:43,priceText:"$36–50",pick:false,site:"https://zoomoov.com/",map:"Zoomoov Jolly Fields Singapore"},
 ];
-
-const listEl = document.getElementById('list');
-const emptyEl = document.getElementById('empty');
-const countEl = document.getElementById('count');
-const qEl = document.getElementById('q');
-const sortEl = document.getElementById('sort');
-let region = 'all';
+const PMAX=120;
+const grid=document.getElementById('grid'),empty=document.getElementById('empty'),
+  count=document.getElementById('count'),q=document.getElementById('q'),sort=document.getElementById('sort');
+let region='all';
 
 function render(){
-  const q = qEl.value.trim().toLowerCase();
-  let rows = DATA.filter(d=>{
-    const matchRegion = region==='all' || d.region.includes(region);
-    const matchQ = !q || d.name.toLowerCase().includes(q) || d.area.toLowerCase().includes(q);
-    return matchRegion && matchQ;
-  });
-  const s = sortEl.value;
-  rows.sort((a,b)=>{
-    if(s==='rating') return b.rating-a.rating;
-    if(s==='priceLow') return a.price-b.price;
-    if(s==='priceHigh') return b.price-a.price;
-    if(s==='name') return a.name.localeCompare(b.name);
-    return a.rank-b.rank;
-  });
-
-  countEl.textContent = rows.length + (rows.length===1?' playground':' playgrounds') + (region!=='all'?' in '+region:'');
-  listEl.innerHTML = rows.map(d=>{
-    const full = Math.floor(d.rating), half = d.rating%1>=0.3;
-    const stars = '★'.repeat(full) + (half?'½':'');
-    return `<div class="card${d.pick?' pick':''}">
-      <div class="ctop">
-        <h3>${d.name}</h3>
-        ${d.pick?'<span class="pickbadge">⭐ Our pick</span>':''}
+  const term=q.value.trim().toLowerCase();
+  let rows=DATA.filter(d=>(region==='all'||d.region.includes(region))&&
+    (!term||d.name.toLowerCase().includes(term)||d.area.toLowerCase().includes(term)));
+  const s=sort.value;
+  rows.sort((a,b)=> s==='rating'?b.rating-a.rating : s==='priceLow'?a.price-b.price :
+    s==='priceHigh'?b.price-a.price : s==='name'?a.name.localeCompare(b.name) : a.rank-b.rank);
+  count.textContent=rows.length+(rows.length===1?' venue':' venues')+(region!=='all'?' · '+region:'');
+  grid.innerHTML=rows.map(d=>{
+    const ratePct=(d.rating/5*100).toFixed(0);
+    const pricePct=(d.price/PMAX*100).toFixed(0); // higher = pricier
+    return `<div class="card">
+      <div class="thumb${d.pick?' pick':''}" style="background:${d.color}">
+        <span class="big">${d.emoji}</span>
+        <span class="rank">#${d.rank}</span>
       </div>
-      <div class="stars">${stars} <small>~${d.rating} · Google</small></div>
-      <div>${d.region.map(r=>`<span class="region">${r}</span>`).join(' ')}</div>
-      <div class="loc">📍 ${d.area}</div>
-      <div class="price"><span class="big">${d.priceText}</span><div class="note">est. for 2 adults + 2 kids</div></div>
-      <div class="verdict">${d.verdict}</div>
-      <div class="links">
-        <a class="site" href="${d.site}" target="_blank" rel="noopener">Official site ↗</a>
-        <a class="map" href="https://maps.google.com/?q=${encodeURIComponent(d.map)}" target="_blank" rel="noopener">Map</a>
+      <div class="cbody">
+        <h3>${d.name}</h3>
+        <div class="regions">${d.region.map(r=>`<span class="rtag">${r}</span>`).join('')}</div>
+        <div class="loc">📍 ${d.area}</div>
+        <div class="meter"><span class="ico">★ Rating</span>
+          <span class="track"><span class="fill rate" style="width:${ratePct}%"></span></span>
+          <span class="mval">${d.rating}</span></div>
+        <div class="meter"><span class="ico">$ Price</span>
+          <span class="track"><span class="fill price" style="width:${pricePct}%"></span></span>
+          <span class="mval">${d.priceText}</span></div>
+        <div class="links">
+          <a class="site" href="${d.site}" target="_blank" rel="noopener">Visit ↗</a>
+          <a class="map" href="https://maps.google.com/?q=${encodeURIComponent(d.map)}" target="_blank" rel="noopener">Map</a>
+        </div>
       </div>
     </div>`;
   }).join('');
-  emptyEl.style.display = rows.length ? 'none':'block';
+  empty.style.display=rows.length?'none':'block';
 }
-
-document.querySelectorAll('.chip').forEach(c=>{
-  c.addEventListener('click',()=>{
-    document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
-    c.classList.add('active');
-    region = c.dataset.region;
-    render();
-  });
+document.getElementById('chips').addEventListener('click',e=>{
+  const c=e.target.closest('.chip'); if(!c)return;
+  document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
+  c.classList.add('active'); region=c.dataset.r; render();
 });
-qEl.addEventListener('input', render);
-sortEl.addEventListener('change', render);
-render();
+q.addEventListener('input',render); sort.addEventListener('change',render); render();
 </script>
 </body>
 </html>
