@@ -3,287 +3,233 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Singapore Indoor Playgrounds — Family Guide (2A + 2K)</title>
-<meta name="description" content="A curated, ranked guide to Singapore's best indoor playgrounds — location, reviews, and estimated price for 2 adults + 2 kids.">
+<title>Singapore Indoor Playgrounds — Family Finder (2A + 2K)</title>
+<meta name="description" content="Filter and compare Singapore's best indoor playgrounds by region, price, and rating. Links to official sites. Costs estimated for 2 adults + 2 kids.">
 <style>
   :root{
     --bg:#fbf7f0; --card:#ffffff; --ink:#2a2420; --muted:#6b6058;
     --line:#ece3d7; --accent:#e8743b; --accent2:#2f9e8f; --gold:#f2b705;
-    --pick:#fff6ec; --shadow:0 2px 14px rgba(70,50,30,.08);
-    --radius:16px;
+    --pick:#fff6ec; --chip:#f3ece1; --shadow:0 2px 14px rgba(70,50,30,.08); --radius:16px;
   }
   @media (prefers-color-scheme: dark){
     :root{ --bg:#17130f; --card:#211b16; --ink:#f4ece2; --muted:#b2a596;
-      --line:#352b22; --pick:#2a2016; --shadow:0 2px 16px rgba(0,0,0,.35); }
+      --line:#352b22; --pick:#2a2016; --chip:#2b2219; --shadow:0 2px 16px rgba(0,0,0,.35); }
   }
   *{box-sizing:border-box}
-  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-    background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
-  header.hero{padding:52px 0 30px;text-align:center}
-  .hero h1{font-size:clamp(28px,5vw,44px);margin:0 0 10px;letter-spacing:-.02em}
-  .hero p.sub{color:var(--muted);font-size:clamp(15px,2.3vw,18px);margin:0 auto;max-width:620px}
-  .meta-pills{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:18px}
-  .pill{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13px;color:var(--muted);box-shadow:var(--shadow)}
-  .pill b{color:var(--ink)}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 18px}
+  header.hero{padding:34px 0 18px;text-align:center}
+  .hero h1{font-size:clamp(25px,5vw,38px);margin:0 0 8px;letter-spacing:-.02em}
+  .hero p{color:var(--muted);font-size:clamp(14px,2.2vw,16px);margin:0 auto;max-width:560px}
 
-  section{margin:34px 0}
-  h2{font-size:clamp(20px,3.2vw,26px);margin:0 0 6px;letter-spacing:-.01em}
-  .section-note{color:var(--muted);font-size:14px;margin:0 0 18px}
-
-  /* Recommendation banner */
-  .rec{background:linear-gradient(135deg,var(--pick),var(--card));border:1px solid var(--line);
-    border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}
-  .rec .tag{display:inline-block;background:var(--gold);color:#4a3600;font-weight:700;font-size:12px;
+  /* Pick banner */
+  .rec{background:linear-gradient(135deg,var(--pick),var(--card));border:1px solid var(--gold);
+    border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);margin:18px 0}
+  .rec .tag{display:inline-block;background:var(--gold);color:#4a3600;font-weight:700;font-size:11px;
     padding:3px 10px;border-radius:999px;letter-spacing:.03em;text-transform:uppercase}
-  .rec h3{margin:12px 0 4px;font-size:22px}
-  .rec .why{color:var(--muted);margin:6px 0 0;font-size:15px}
-  .rec-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
-  @media (max-width:640px){.rec-grid{grid-template-columns:1fr}}
-  .rec-mini{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
-  .rec-mini .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
-  .rec-mini .val{font-weight:700;font-size:15px;margin-top:2px}
+  .rec h3{margin:8px 0 3px;font-size:18px}
+  .rec p{margin:0;color:var(--muted);font-size:14px}
+
+  /* Controls */
+  .controls{position:sticky;top:0;z-index:20;background:var(--bg);padding:12px 0;border-bottom:1px solid var(--line)}
+  .search{width:100%;padding:12px 14px;font-size:16px;border:1px solid var(--line);border-radius:12px;
+    background:var(--card);color:var(--ink)}
+  .search::placeholder{color:var(--muted)}
+  .filter-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+  .flabel{font-size:12px;color:var(--muted);margin-right:2px;align-self:center}
+  .chip{background:var(--chip);border:1px solid var(--line);border-radius:999px;padding:7px 14px;
+    font-size:13px;color:var(--ink);cursor:pointer;user-select:none;transition:.12s}
+  .chip:hover{border-color:var(--accent2)}
+  .chip.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .sortsel{margin-left:auto;padding:7px 10px;border:1px solid var(--line);border-radius:10px;
+    background:var(--card);color:var(--ink);font-size:13px}
+  .count{font-size:12.5px;color:var(--muted);margin:10px 0 2px}
 
   /* Cards */
-  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px}
+  #list{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin:8px 0 10px}
   .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-    padding:20px;box-shadow:var(--shadow);position:relative;display:flex;flex-direction:column}
-  .card.top{border-color:var(--gold);box-shadow:0 0 0 2px rgba(242,183,5,.25),var(--shadow)}
-  .rank{position:absolute;top:-12px;left:18px;background:var(--accent);color:#fff;font-weight:700;
-    font-size:13px;border-radius:999px;padding:4px 12px;box-shadow:var(--shadow)}
-  .card.top .rank{background:var(--gold);color:#4a3600}
-  .card h3{margin:8px 0 2px;font-size:19px}
-  .stars{color:var(--gold);font-size:14px;letter-spacing:1px}
-  .rating-num{color:var(--muted);font-size:13px;margin-left:4px}
-  .loc{color:var(--muted);font-size:13px;margin:8px 0}
-  .loc a{color:var(--accent2);text-decoration:none}
-  .loc a:hover{text-decoration:underline}
-  .price-box{background:var(--bg);border-radius:10px;padding:10px 12px;margin:10px 0;font-size:14px}
-  .price-box .big{font-size:20px;font-weight:800;color:var(--accent)}
-  .price-box .note{color:var(--muted);font-size:12px;margin-top:2px}
-  .tags{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 10px}
-  .tags span{background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:3px 9px;font-size:11px;color:var(--muted)}
-  .verdict{font-size:13.5px;color:var(--ink);margin-top:auto;padding-top:10px;border-top:1px dashed var(--line)}
-  .ages{font-size:12px;color:var(--muted)}
+    padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column}
+  .card.pick{border-color:var(--gold);box-shadow:0 0 0 2px rgba(242,183,5,.22),var(--shadow)}
+  .ctop{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+  .card h3{margin:0;font-size:18px}
+  .pickbadge{background:var(--gold);color:#4a3600;font-weight:700;font-size:10px;padding:2px 8px;
+    border-radius:999px;text-transform:uppercase;letter-spacing:.03em;white-space:nowrap}
+  .stars{color:var(--gold);font-size:13px;margin-top:3px}
+  .stars small{color:var(--muted)}
+  .region{display:inline-block;background:var(--chip);border:1px solid var(--line);border-radius:999px;
+    padding:2px 9px;font-size:11px;color:var(--muted);margin-top:8px}
+  .loc{color:var(--muted);font-size:12.5px;margin:8px 0 0}
+  .price{background:var(--bg);border-radius:10px;padding:9px 11px;margin:10px 0}
+  .price .big{font-size:19px;font-weight:800;color:var(--accent)}
+  .price .note{color:var(--muted);font-size:11.5px;margin-top:2px}
+  .verdict{font-size:13px;color:var(--ink);margin:2px 0 12px}
+  .links{display:flex;gap:8px;margin-top:auto}
+  .links a{flex:1;text-align:center;text-decoration:none;font-size:13px;font-weight:600;
+    padding:9px;border-radius:10px;border:1px solid var(--line)}
+  .links a.site{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .links a.map{background:var(--card);color:var(--accent2)}
+  .links a:hover{opacity:.9}
+  .empty{text-align:center;color:var(--muted);padding:40px 0;font-size:15px}
 
-  /* Table */
-  table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--card);
-    border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
-  th,td{padding:11px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
-  th{background:var(--bg);font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
-  tr:last-child td{border-bottom:none}
-  td .est{font-weight:700;color:var(--accent)}
-  .table-scroll{overflow-x:auto}
-
-  .closed{opacity:.6;font-style:italic}
-  .comments li{margin:8px 0}
-  footer{margin:48px 0 30px;color:var(--muted);font-size:12.5px;text-align:center;border-top:1px solid var(--line);padding-top:20px}
-  footer a{color:var(--accent2)}
-  .disclaimer{font-size:11.5px;color:var(--muted);max-width:720px;margin:14px auto 0}
+  .tips{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin:14px 0}
+  .tips h2{margin:0 0 8px;font-size:18px}
+  .tips li{font-size:13.5px;margin:6px 0;color:var(--ink)}
+  footer{margin:30px 0;color:var(--muted);font-size:12px;text-align:center;border-top:1px solid var(--line);padding-top:16px}
 </style>
 </head>
 <body>
 <div class="wrap">
 
   <header class="hero">
-    <h1>🎪 Singapore Indoor Playgrounds</h1>
-    <p class="sub">A ranked family guide — location, reviews &amp; estimated cost for a day out with <b>2 adults + 2 kids</b>. Built for beating the heat (and the haze).</p>
-    <div class="meta-pills">
-      <span class="pill">👨‍👩‍👦‍👦 Sized for <b>2 adults + 2 kids</b></span>
-      <span class="pill">🧒 Ages <b>~2 &amp; ~5</b></span>
-      <span class="pill">📅 Prices as of <b>Oct 2026</b></span>
-      <span class="pill">🧦 Grip socks required everywhere</span>
-    </div>
+    <h1>🎪 SG Indoor Playground Finder</h1>
+    <p>Filter by region, price &amp; rating. Tap a venue for its official site. Costs estimated for <b>2 adults + 2 kids</b>.</p>
   </header>
 
-  <!-- RECOMMENDATION -->
-  <section>
-    <div class="rec">
-      <span class="tag">⭐ Our Top Pick</span>
-      <h3>Amazonia @ Great World</h3>
-      <p class="why">Best all-round value &amp; experience for your crew: an 8m wave slide and big climbing structures for the 5-year-old, a soft-padded toddler zone for the little one, a comfy in-house bistro so the adults can actually sit — and <b>unlimited play on weekdays</b>. Central, clean, and consistently well-reviewed.</p>
-      <div class="rec-grid">
-        <div class="rec-mini"><div class="lbl">Est. cost (2A + 2K)</div><div class="val">~$78–88 weekday</div></div>
-        <div class="rec-mini"><div class="lbl">Location</div><div class="val">Great World, #03-113 (central)</div></div>
-        <div class="rec-mini"><div class="lbl">Review</div><div class="val">★★★★½ ~4.3 / 5</div></div>
-        <div class="rec-mini"><div class="lbl">Best day to go</div><div class="val">Weekday = unlimited + quiet</div></div>
-      </div>
-      <p class="why" style="margin-top:14px"><b>Runner-up:</b> <b>Kiztopia (Marina Square flagship)</b> if you want the most variety/edutainment (18 zones) — or <b>T-Play (HomeTeamNS)</b> as the value champion if you don't mind heading to Bukit Batok / Khatib.</p>
+  <div class="rec">
+    <span class="tag">⭐ Our pick</span>
+    <h3>Amazonia @ Great World</h3>
+    <p>Best all-rounder for a ~5yo + ~2yo: big slides, safe toddler zone, parent bistro, and <b>unlimited weekday play</b>. Central &amp; well-reviewed (~$78–88).</p>
+  </div>
+
+  <div class="controls">
+    <input id="q" class="search" type="search" placeholder="🔍 Search a playground…" autocomplete="off">
+    <div class="filter-row">
+      <span class="flabel">Region:</span>
+      <span class="chip active" data-region="all">All</span>
+      <span class="chip" data-region="Central">Central</span>
+      <span class="chip" data-region="East">East</span>
+      <span class="chip" data-region="West">West</span>
+      <span class="chip" data-region="North">North</span>
+      <span class="chip" data-region="North-East">North-East</span>
+      <select id="sort" class="sortsel">
+        <option value="rank">Sort: Our ranking</option>
+        <option value="rating">Highest rated</option>
+        <option value="priceLow">Cheapest first</option>
+        <option value="priceHigh">Priciest first</option>
+        <option value="name">A–Z</option>
+      </select>
     </div>
-  </section>
+    <div class="count" id="count"></div>
+  </div>
 
-  <!-- RANKED CARDS -->
-  <section>
-    <h2>The Ranked Shortlist</h2>
-    <p class="section-note">Ranked for a family of 4 (2 adults, 2 young kids) weighing experience, value, location &amp; reviews. Prices are estimates — always check the venue/Klook before going.</p>
-    <div class="cards">
+  <div id="list"></div>
+  <div class="empty" id="empty" style="display:none">No playgrounds match — try clearing filters.</div>
 
-      <div class="card top">
-        <span class="rank">#1 Top Pick</span>
-        <h3>Amazonia</h3>
-        <div class="stars">★★★★½ <span class="rating-num">~4.3 · Google</span></div>
-        <div class="loc">📍 Great World, #03-113 · 1 Kim Seng Promenade · <a href="https://maps.google.com/?q=Amazonia+Great+World+Singapore" target="_blank" rel="noopener">Map</a></div>
-        <div class="tags"><span>Ages 1–12</span><span>8m wave slide</span><span>Toddler zone</span><span>Bistro</span></div>
-        <div class="price-box">
-          <div class="big">~$78–88</div>
-          <div class="note">Weekday (unlimited): 2 kids (toddler ~$28.80 + child ~$38.90) + 2 free adults. Weekend = 2–2.5hr cap, similar price. Extra adult ~$10–12.</div>
-        </div>
-        <div class="verdict">✅ Best balance of thrill (for Leo) + safe soft play (for Lucas) + parent comfort. Weekday unlimited play is the killer feature.</div>
-      </div>
-
-      <div class="card">
-        <span class="rank">#2</span>
-        <h3>Kiztopia</h3>
-        <div class="stars">★★★★½ <span class="rating-num">~4.4 · Google</span></div>
-        <div class="loc">📍 Marina Square flagship (18,000 sqft) · also Jurong Point, Waterway Point, Cineleisure · <a href="https://maps.google.com/?q=Kiztopia+Marina+Square" target="_blank" rel="noopener">Map</a></div>
-        <div class="tags"><span>Ages 1–10</span><span>18 themed zones</span><span>Role-play</span><span>Mega ball pit</span></div>
-        <div class="price-box">
-          <div class="big">~$80–100</div>
-          <div class="note">2-hr ~$39.80/child ×2 + 2 free adults (1 per child). 3-hr ~$49.80. Extra adult ~$12–15.</div>
-        </div>
-        <div class="verdict">🎨 Most variety &amp; "edutainment" (supermarket, bakery, salon role-play). Gets very crowded on weekends — pre-book.</div>
-      </div>
-
-      <div class="card">
-        <span class="rank">#3 Best Value</span>
-        <h3>T-Play (HomeTeamNS)</h3>
-        <div class="stars">★★★★★ <span class="rating-num">~4.7 · Google</span></div>
-        <div class="loc">📍 Bukit Batok (4.8★) &amp; Khatib (4.6★) · <a href="https://maps.google.com/?q=T-Play+HomeTeamNS+Bukit+Batok" target="_blank" rel="noopener">Map</a></div>
-        <div class="tags"><span>Multi-storey</span><span>Highest rated</span><span>Great value</span></div>
-        <div class="price-box">
-          <div class="big">~$41–51</div>
-          <div class="note">Non-member peak ~$25.46/child (incl. 1 free adult) ×2. Off-peak Tue–Thu much cheaper. HomeTeamNS members pay far less (~$16/child peak).</div>
-        </div>
-        <div class="verdict">💰 Cheapest quality option + highest reviews. Trade-off: further out (Bukit Batok / Khatib). Worth it if you're nearby or a member.</div>
-      </div>
-
-      <div class="card">
-        <span class="rank">#4</span>
-        <h3>The Polliwogs</h3>
-        <div class="stars">★★★★ <span class="rating-num">~4.2 · Google</span></div>
-        <div class="loc">📍 VivoCity #03-12 · Clarke Quay Central (cat-themed "Nekoland") · <a href="https://maps.google.com/?q=The+Polliwogs+VivoCity" target="_blank" rel="noopener">Map</a></div>
-        <div class="tags"><span>Ages 0–12</span><span>Separate toddler zone</span><span>Parent lounge</span></div>
-        <div class="price-box">
-          <div class="big">~$50–66</div>
-          <div class="note">Weekend ~$23–28/child ×2 + 2 adults (1 free each, extra ~$10–12). Weekday often unlimited &amp; cheaper (~$20–24).</div>
-        </div>
-        <div class="verdict">👶 Most parent-friendly — dedicated Poco toddler zone (great for Lucas) + "Chillax Area" with wifi &amp; power. VivoCity = easy.</div>
-      </div>
-
-      <div class="card">
-        <span class="rank">#5</span>
-        <h3>SuperPark</h3>
-        <div class="stars">★★★★ <span class="rating-num">~4.3 · Google</span></div>
-        <div class="loc">📍 Suntec City Mall (North Wing), 25,000 sqft · <a href="https://maps.google.com/?q=SuperPark+Suntec+City" target="_blank" rel="noopener">Map</a></div>
-        <div class="tags"><span>34 activities</span><span>Trampolines</span><span>Go-karts</span><span>Tweens+</span></div>
-        <div class="price-box">
-          <div class="big">~$62–100</div>
-          <div class="note">2-hr pass ~$30.90–33.90/person. Off-peak from ~$19. NB: better for older kids — toddler (~2yo) will use less of it.</div>
-        </div>
-        <div class="verdict">🤸 Fantastic for Leo &amp; adults (ninja tracks, basketball, go-karts) — but you pay per person incl. adults, so it adds up. Lean active.</div>
-      </div>
-
-      <div class="card">
-        <span class="rank">#6 Budget</span>
-        <h3>Kidz Amaze</h3>
-        <div class="stars">★★★★ <span class="rating-num">~4.2 · Google</span></div>
-        <div class="loc">📍 SAFRA Toa Payoh, Jurong &amp; Punggol (Punggol has indoor water play) · <a href="https://maps.google.com/?q=Kidz+Amaze+SAFRA" target="_blank" rel="noopener">Map</a></div>
-        <div class="tags"><span>Huge vertical maze</span><span>Water play (Punggol)</span><span>Cheapest</span></div>
-        <div class="price-box">
-          <div class="big">~$24–40</div>
-          <div class="note">~$12–20/child; SAFRA members cheaper. Among the most affordable in SG.</div>
-        </div>
-        <div class="verdict">💵 Best rock-bottom price. Giant multi-storey maze. Splash@Punggol adds a sheltered water playground — bring swimwear.</div>
-      </div>
-
-      <div class="card">
-        <span class="rank">#7</span>
-        <h3>buds by Shangri-La</h3>
-        <div class="stars">★★★★ <span class="rating-num">~4.3 · Google</span></div>
-        <div class="loc">📍 Shangri-La Hotel, Orange Grove Rd · <a href="https://maps.google.com/?q=buds+by+Shangri-La" target="_blank" rel="noopener">Map</a></div>
-        <div class="tags"><span>Premium</span><span>Wet play</span><span>Cooking/baking</span><span>Sensory</span></div>
-        <div class="price-box">
-          <div class="big">~$90–120</div>
-          <div class="note">~$38–48/child. Premium indoor-outdoor, wet play + interactive zones.</div>
-        </div>
-        <div class="verdict">✨ The luxe option — beautiful, sensory-rich, indoor-outdoor. Priciest; best for a special treat rather than a regular outing.</div>
-      </div>
-
-      <div class="card">
-        <span class="rank">#8</span>
-        <h3>Airzone</h3>
-        <div class="stars">★★★★ <span class="rating-num">~4.4 · Google</span></div>
-        <div class="loc">📍 City Square Mall, #02-K4/K10 · <a href="https://maps.google.com/?q=Airzone+City+Square+Mall" target="_blank" rel="noopener">Map</a></div>
-        <div class="tags"><span>Suspended nets</span><span>60-min sessions</span><span>Active/older kids</span></div>
-        <div class="price-box">
-          <div class="big">~$56–60</div>
-          <div class="note">~$27.90–29.90/child per 60-min. "Two-to-Play" weekday bundle ~$50–55. 4-session pass ~$88.</div>
-        </div>
-        <div class="verdict">🕸️ Unique giant suspended-net play. Short 60-min sessions + better for older/bigger kids — the 2yo may be too small for most of it.</div>
-      </div>
-
-      <div class="card">
-        <span class="rank">#9</span>
-        <h3>Zoomoov / Jolly Fields</h3>
-        <div class="stars">★★★★ <span class="rating-num">~4.1–4.5 · Google</span></div>
-        <div class="loc">📍 Many malls: Jewel, City Square, Jurong Point, Westgate, AMK Hub, VivoCity, Kallang Wave · <a href="https://maps.google.com/?q=Zoomoov+Jolly+Fields+Singapore" target="_blank" rel="noopener">Map</a></div>
-        <div class="tags"><span>Animal rides</span><span>Cassia-seed sand pit</span><span>Toddler-friendly</span></div>
-        <div class="price-box">
-          <div class="big">~$36–50</div>
-          <div class="note">Animal rides ~$10–12 each. Jolly Fields play pit ~$18–20/entry. Pay-per-play — flexible.</div>
-        </div>
-        <div class="verdict">🦄 Great for the 2yo (gentle rides + sand-play), very accessible (everywhere). Less for the 5yo. Good quick top-up, not a full day.</div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- FULL TABLE -->
-  <section>
-    <h2>At-a-Glance Comparison</h2>
-    <p class="section-note">Estimated total for <b>2 adults + 2 kids</b> (one toddler ~2yo, one child ~5yo). Most venues give 1 free adult per child, so adults are usually free. Figures rounded; verify before booking.</p>
-    <div class="table-scroll">
-    <table>
-      <thead>
-        <tr><th>Playground</th><th>Location</th><th>Review</th><th>Est. 2A+2K</th><th>Best for</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><b>Amazonia</b> ⭐</td><td>Great World (central)</td><td>~4.3★</td><td class="est">~$78–88</td><td>All-round + weekday unlimited</td></tr>
-        <tr><td><b>Kiztopia</b></td><td>Marina Sq / islandwide</td><td>~4.4★</td><td class="est">~$80–100</td><td>Most variety / role-play</td></tr>
-        <tr><td><b>T-Play</b></td><td>Bukit Batok / Khatib</td><td>~4.7★</td><td class="est">~$41–51</td><td>Best value + top reviews</td></tr>
-        <tr><td><b>The Polliwogs</b></td><td>VivoCity / Clarke Quay</td><td>~4.2★</td><td class="est">~$50–66</td><td>Toddler + parent comfort</td></tr>
-        <tr><td><b>SuperPark</b></td><td>Suntec City</td><td>~4.3★</td><td class="est">~$62–100</td><td>Active/older kids + adults</td></tr>
-        <tr><td><b>Kidz Amaze</b></td><td>SAFRA (3 outlets)</td><td>~4.2★</td><td class="est">~$24–40</td><td>Cheapest + water play</td></tr>
-        <tr><td><b>buds by Shangri-La</b></td><td>Orange Grove Rd</td><td>~4.3★</td><td class="est">~$90–120</td><td>Luxury / sensory treat</td></tr>
-        <tr><td><b>Airzone</b></td><td>City Square Mall</td><td>~4.4★</td><td class="est">~$56–60</td><td>Suspended nets (older kids)</td></tr>
-        <tr><td><b>Zoomoov / Jolly Fields</b></td><td>Islandwide malls</td><td>~4.1–4.5★</td><td class="est">~$36–50</td><td>Toddlers / quick top-up</td></tr>
-        <tr class="closed"><td>Cool de Sac</td><td>Suntec (former)</td><td>—</td><td>—</td><td>⚠️ Permanently closed</td></tr>
-        <tr class="closed"><td>Fidgets</td><td>Grandstand / MBS (former)</td><td>—</td><td>—</td><td>⚠️ Permanently closed</td></tr>
-      </tbody>
-    </table>
-    </div>
-  </section>
-
-  <!-- COMMENTS -->
-  <section>
-    <h2>Other Comments &amp; Tips</h2>
-    <ul class="comments">
-      <li>🧦 <b>Grip socks are mandatory</b> for kids (and often adults) at every venue — buy a few pairs to keep in the car, or you'll pay ~$3–5 each at the door.</li>
-      <li>📅 <b>Go on a weekday if you can.</b> Many venues (Amazonia, Polliwogs, T-Play off-peak) give <b>unlimited play</b> on weekdays for the same or lower price vs a 2-hour weekend cap — and far smaller crowds.</li>
-      <li>💳 <b>Adults are usually free</b> (1 per child), so a family of 4 effectively pays 2 child tickets at most venues. The exception is <b>SuperPark</b>, which charges per person — it's the one place adults add real cost.</li>
-      <li>🧒 <b>Age split matters for your two.</b> A ~5yo + a ~2yo is best served by venues with a <b>separate toddler zone</b> (Amazonia, Polliwogs, Kiztopia) so the little one isn't trampled by big kids. Airzone &amp; SuperPark skew older.</li>
-      <li>📲 <b>Pre-book online</b> (venue site or Klook/Trip.com) for weekends &amp; school holidays — timed slots sell out, and Klook is often cheaper than walk-in.</li>
-      <li>🍜 <b>Amazonia's in-house bistro</b> is a genuine differentiator — parents can eat/work while kids play, which turns a 2-hour outing into a relaxed half-day.</li>
-      <li>💧 <b>SAFRA Punggol (Kidz Amaze)</b> has a sheltered <b>indoor water playground</b> — pack swimwear &amp; a towel if you go there.</li>
-      <li>⚠️ <b>Closed, don't bother:</b> Cool de Sac (Suntec) and Fidgets (Grandstand/MBS) have both shut. "Pixieland" isn't an active SG playground.</li>
+  <div class="tips">
+    <h2>💡 Quick tips</h2>
+    <ul>
+      <li>🧦 <b>Grip socks mandatory</b> everywhere — keep spare pairs in the car.</li>
+      <li>📅 <b>Go on a weekday</b> — many give unlimited play + far fewer crowds for the same price.</li>
+      <li>💳 <b>Adults usually free</b> (1 per child) — except <b>SuperPark</b>, which charges per head.</li>
+      <li>🧒 For a ~5yo + ~2yo, pick venues with a <b>separate toddler zone</b> (Amazonia, Polliwogs, Kiztopia).</li>
+      <li>📲 Pre-book weekends &amp; school holidays; Klook is often cheaper than walk-in.</li>
     </ul>
-  </section>
+  </div>
 
   <footer>
-    <p>Compiled Oct 2026 · Prices &amp; ratings are estimates from public listings (Google, Klook, venue sites) and change often — <b>always confirm before heading out</b>.</p>
-    <p class="disclaimer">This is an informational guide, not affiliated with or endorsed by any venue. Ratings are approximate aggregates. Made with 💛 for a family of four.</p>
+    Prices &amp; ratings are Oct-2026 estimates from public listings — confirm on the official site before going.<br>
+    Not affiliated with any venue · made 💛 for a family of four.
   </footer>
-
 </div>
+
+<script>
+const DATA = [
+  { rank:1, name:"Amazonia", region:["Central"], area:"Great World, #03-113", rating:4.3,
+    price:83, priceText:"~$78–88", pick:true,
+    verdict:"All-round best: 8m slide + toddler zone + bistro. Weekday = unlimited play.",
+    site:"https://www.amazoniafun.com/", map:"Amazonia Great World Singapore" },
+  { rank:2, name:"Kiztopia", region:["Central","West","North-East"], area:"Marina Sq (flagship) · Jurong Point · Waterway Point · Cineleisure", rating:4.4,
+    price:90, priceText:"~$80–100", pick:false,
+    verdict:"Most variety — 18 themed zones, role-play, mega ball pit. Crowded weekends.",
+    site:"https://kiztopia.com/", map:"Kiztopia Marina Square" },
+  { rank:3, name:"T-Play (HomeTeamNS)", region:["West","North"], area:"Bukit Batok (4.8★) · Khatib (4.6★)", rating:4.7,
+    price:46, priceText:"~$41–51", pick:false,
+    verdict:"Best value + highest rated. Multi-storey play. Further out; cheaper for members.",
+    site:"https://www.hometeamns.sg/tplay/", map:"T-Play HomeTeamNS Bukit Batok" },
+  { rank:4, name:"The Polliwogs", region:["Central"], area:"VivoCity #03-12 · Clarke Quay Central (cat-themed)", rating:4.2,
+    price:58, priceText:"~$50–66", pick:false,
+    verdict:"Most parent-friendly: dedicated toddler zone + wifi/power lounge. VivoCity = easy.",
+    site:"https://thepolliwogs.com/", map:"The Polliwogs VivoCity" },
+  { rank:5, name:"SuperPark", region:["Central"], area:"Suntec City Mall (North Wing)", rating:4.3,
+    price:81, priceText:"~$62–100", pick:false,
+    verdict:"34 activities, trampolines, go-karts. Great for Leo + adults, but charges per head.",
+    site:"https://www.superpark.com.sg/", map:"SuperPark Suntec City" },
+  { rank:6, name:"Kidz Amaze (SAFRA)", region:["Central","West","North-East"], area:"Toa Payoh · Jurong · Punggol (indoor water play)", rating:4.2,
+    price:32, priceText:"~$24–40", pick:false,
+    verdict:"Cheapest option. Giant vertical maze. Punggol adds a sheltered water playground.",
+    site:"https://www.safra.sg/facilities-services/kidz-amaze-indoor-playgrounds", map:"Kidz Amaze SAFRA Toa Payoh" },
+  { rank:7, name:"buds by Shangri-La", region:["Central"], area:"Shangri-La Hotel, Orange Grove Rd", rating:4.3,
+    price:105, priceText:"~$90–120", pick:false,
+    verdict:"The luxe treat — premium indoor-outdoor, wet play + sensory zones. Priciest.",
+    site:"https://www.shangri-la.com/singapore/shangrila/for-kids/buds-by-shangri-la/", map:"buds by Shangri-La Singapore" },
+  { rank:8, name:"Airzone", region:["Central"], area:"City Square Mall, #02-K4/K10", rating:4.4,
+    price:58, priceText:"~$56–60", pick:false,
+    verdict:"Unique giant suspended nets. 60-min sessions; better for older/bigger kids.",
+    site:"https://airzone.sg/", map:"Airzone City Square Mall" },
+  { rank:9, name:"Zoomoov / Jolly Fields", region:["Central","East","West","North-East"], area:"Jewel · City Square · Jurong Point · Westgate · AMK Hub · VivoCity · Kallang Wave", rating:4.3,
+    price:43, priceText:"~$36–50", pick:false,
+    verdict:"Great for the 2yo (gentle rides + sand play), everywhere. Less for the 5yo.",
+    site:"https://zoomoov.com/", map:"Zoomoov Jolly Fields Singapore" },
+];
+
+const listEl = document.getElementById('list');
+const emptyEl = document.getElementById('empty');
+const countEl = document.getElementById('count');
+const qEl = document.getElementById('q');
+const sortEl = document.getElementById('sort');
+let region = 'all';
+
+function render(){
+  const q = qEl.value.trim().toLowerCase();
+  let rows = DATA.filter(d=>{
+    const matchRegion = region==='all' || d.region.includes(region);
+    const matchQ = !q || d.name.toLowerCase().includes(q) || d.area.toLowerCase().includes(q);
+    return matchRegion && matchQ;
+  });
+  const s = sortEl.value;
+  rows.sort((a,b)=>{
+    if(s==='rating') return b.rating-a.rating;
+    if(s==='priceLow') return a.price-b.price;
+    if(s==='priceHigh') return b.price-a.price;
+    if(s==='name') return a.name.localeCompare(b.name);
+    return a.rank-b.rank;
+  });
+
+  countEl.textContent = rows.length + (rows.length===1?' playground':' playgrounds') + (region!=='all'?' in '+region:'');
+  listEl.innerHTML = rows.map(d=>{
+    const full = Math.floor(d.rating), half = d.rating%1>=0.3;
+    const stars = '★'.repeat(full) + (half?'½':'');
+    return `<div class="card${d.pick?' pick':''}">
+      <div class="ctop">
+        <h3>${d.name}</h3>
+        ${d.pick?'<span class="pickbadge">⭐ Our pick</span>':''}
+      </div>
+      <div class="stars">${stars} <small>~${d.rating} · Google</small></div>
+      <div>${d.region.map(r=>`<span class="region">${r}</span>`).join(' ')}</div>
+      <div class="loc">📍 ${d.area}</div>
+      <div class="price"><span class="big">${d.priceText}</span><div class="note">est. for 2 adults + 2 kids</div></div>
+      <div class="verdict">${d.verdict}</div>
+      <div class="links">
+        <a class="site" href="${d.site}" target="_blank" rel="noopener">Official site ↗</a>
+        <a class="map" href="https://maps.google.com/?q=${encodeURIComponent(d.map)}" target="_blank" rel="noopener">Map</a>
+      </div>
+    </div>`;
+  }).join('');
+  emptyEl.style.display = rows.length ? 'none':'block';
+}
+
+document.querySelectorAll('.chip').forEach(c=>{
+  c.addEventListener('click',()=>{
+    document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
+    c.classList.add('active');
+    region = c.dataset.region;
+    render();
+  });
+});
+qEl.addEventListener('input', render);
+sortEl.addEventListener('change', render);
+render();
+</script>
 </body>
 </html>
